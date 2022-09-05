@@ -1,0 +1,43 @@
+ <header>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#00CCFF;">
+   <div class="container">
+    <nav class="navbar-brand navbar-left header-logo">
+     <%= link_to image_tag("logo1.png", size: "50x50"), root_path, class: "header-button btn text-light" %>
+    </nav>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+     <ul class="nav navbar-nav ml-auto">
+      <!-- 会員がログインしている時 -->
+      <% if user_signed_in? %>
+        <li><%= link_to "マイページ", class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "投稿一覧",  class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header-button btn text-light" %></li>
+
+      <!-- 管理者がログインしている時 -->
+      <% elsif admin_signed_in? %>
+        <li><%= link_to "投稿一覧", class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "コメント一覧", class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header-button btn text-light" %></li>
+
+      <!-- ログインしていない時 -->
+      <% else %>
+        <li><%= link_to "サイトについて", about_path, class: "header-button btn text-light" %></li>
+        <li><%= link_to "投稿一覧", class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "新規登録", new_user_registration_path, class: "header-button btn text-light" %></li>
+        <li><%= link_to "ログイン", new_user_session_path, class: "header-button btn text-light" %></li>
+      <% end %>
+     </ul>
+
+     <!-- 検索機能 -->
+     <form class="d-flex">
+      <input class="ml-2 form-control me-2" type="search" placeholder="検索" aria-label="Search">
+      <button class="btn btn-outline-light ml-2" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+     </form>
+    </div>
+   </div>
+  </nav>
+</header>
