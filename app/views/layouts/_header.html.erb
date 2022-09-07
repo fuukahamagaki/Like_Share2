@@ -11,20 +11,20 @@
      <ul class="nav navbar-nav ml-auto">
       <!-- 会員がログインしている時 -->
       <% if user_signed_in? %>
-        <li><%= link_to "マイページ", class: "header-button btn text-light" %></li><!--path-->
-        <li><%= link_to "投稿一覧",  class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "マイページ", user_path, class: "header-button btn text-light" %></li>
+        <li><%= link_to "投稿一覧", posts_path, class: "header-button btn text-light" %></li>
         <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header-button btn text-light" %></li>
 
       <!-- 管理者がログインしている時 -->
       <% elsif admin_signed_in? %>
-        <li><%= link_to "投稿一覧", class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "投稿一覧", post_path, class: "header-button btn text-light" %></li>
         <li><%= link_to "コメント一覧", class: "header-button btn text-light" %></li><!--path-->
         <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header-button btn text-light" %></li>
 
       <!-- ログインしていない時 -->
       <% else %>
         <li><%= link_to "サイトについて", about_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "投稿一覧", class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "投稿一覧", posts_path, class: "header-button btn text-light" %></li>
         <li><%= link_to "新規登録", new_user_registration_path, class: "header-button btn text-light" %></li>
         <li><%= link_to "ログイン", new_user_session_path, class: "header-button btn text-light" %></li>
       <% end %>

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row text-right my-4">
+   <div class="col-sm-3">
+    <h2>投稿詳細</h2>
+   </div>
+    <div class="col-sm-3">
+     <% if current_user.id == @user.id %>
+      <div class="button_post">
+        <%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success" %>
+        <%= link_to '削除', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+      </div>
+     <% end %>
+    </div>
+  </div>
+  <table class="col-6 table table-bordered mt-3 ml-3 text-center">
+    <tr>
+      <td class="col-3 table-active border-dark">タイトル</td>
+      <td class="border-dark"><%= @post.title %></td>
+    </tr>
+    <tr>
+      <td class="col-3 table-active border-dark">本文</td>
+      <td class="border-dark"><%= @post.body %></td>
+    </tr>
+  </table>
+
+    コメント数: <%#= @post.post_comments.count %>
+    いいね数：
+
+</div>
