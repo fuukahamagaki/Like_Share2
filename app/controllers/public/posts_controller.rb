@@ -1,14 +1,15 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index] #ユーザーがログインしているかどうか（show,indexを除く）
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  #before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
   end
 
   def show
-    @post = Post.find(params[:id])
-    @post_comment = PostComment.new
+    @post = Post.find(params[:id]) #postsテーブルのidを取得している
+    @post_comment = PostComment.new #コメントの新規作成
+    @post_comments = @post.post_comments.includes(:user).order(created_at: :desc)
     @user = @post.user
   end
 

@@ -29,19 +29,19 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to user_path(user), notice: 'guestuserでログインしました。'
+    redirect_to root_path(user), notice: 'guestuserでログインしました。'
   end
 
-   protected
+  protected
   def user_state
     @user = User.find_by(email: params[:user][:email])
-    return if !@user
-    if @user.valid_password?(params[:user][:password])
-      if @user.is_deleted == true
+   return if !@user
+   if @user.valid_password?(params[:user][:password])
+    if @user.is_deleted == true
         redirect_to new_user_registration_path
 
-      end
     end
+   end
   end
 
 end

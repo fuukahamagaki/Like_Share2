@@ -3,17 +3,14 @@ Rails.application.routes.draw do
   root :to =>"public/homes#top"
    get "about"=>"public/homes#about"
 
-  #ゲストログイン
-  devise_scope :user do
-    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
-  end
-
+  
   scope module: :public do
     #resources :users, only: [:show, :edit, :update]
      # get "users/:id/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
       #patch "users/:id/withdraw" => "users#withdraw", as: "withdraw"
-    resources :posts, only: [:new, :show, :index, :create, :edit, :update, :destroy]
-    resources :post_comments, only: [:create, :destroy]
+    resources :posts, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
+     resources :post_comments, only: [:create], shallow: true #shallow→createだけpost_idが欲しいのでonly
+    end
   end
 
   get "users" => "public/users#show", as: "user"
@@ -28,7 +25,13 @@ Rails.application.routes.draw do
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
+    
   }
+  #ゲストログイン
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
 
   # 管理者用
   # URL /admin/sign_in ...

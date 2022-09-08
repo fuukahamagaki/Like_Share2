@@ -22,8 +22,26 @@
       <td class="border-dark"><%= @post.body %></td>
     </tr>
   </table>
+       <div class="ml-3">
+        <h5>
+          コメント数: <%= @post.post_comments.count %>
+          いいね数：
+        </h5>
+       </div>
 
-    コメント数: <%#= @post.post_comments.count %>
-    いいね数：
+    <div class="ml-3 mt-5">
+     <%= form_with(session: :post_comment, local:true) do |f| %>
+      <%= f.text_area :comment %>
+      <%= f.submit 'コメントする' %>
+     <% end %>
+    </div>
+
+    <%# @posts.each do |post| %>
+      <tr>
+        <td><%#= link_to post.title,post, class: "post_#{post.id}" %></td>
+        <td><%#= post.body %></td>
+        
+
+    <%# end %>
 
 </div>

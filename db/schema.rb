@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2022_09_07_070621) do
     t.string "title"
     t.text "body"
     t.integer "user_id"
+    t.integer "post_comment_id"
+    t.integer "favorite_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

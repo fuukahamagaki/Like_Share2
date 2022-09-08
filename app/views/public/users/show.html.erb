@@ -5,8 +5,11 @@
 
   <div class="row mt-3">
     <div class="col-2"><h4><strong>登録情報</strong></h4></div>
-    <div class="col-2"><%= link_to "編集する", edit_user_path(@user), class: "btn btn-success" %></div>
-  </div>
+    <% if @user.nickname != "guestuser" %>
+     <div class="col-2">
+       <%= link_to "編集する", edit_user_path(@user), class: "btn btn-success" %></div>
+     </div>
+    <% end %>
 
   <table class="col-6 table table-bordered mt-3 ml-3">
     <tr>
