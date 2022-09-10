@@ -1,24 +1,28 @@
 class Public::PostCommentsController < ApplicationController
 
   def create
-    comment = current_user.comments.build(comment_params)
-    if comment.save
-      redirect_to post_path(comment.post), success: t('defaults.message.created', item: Comment.model_name.human)
-    else
-      redirect_to post_path(comment.post), danger: t('defaults.message.not_created', item: Comment.model_name.human)
-    end
+    post = Post.find(params[:post_id])
+    comment = current_user.post_comments.new(post_comment_params)
+    comment.post_id = post.id
+    comment.save
+    redirect_to post_path(id: params[:post_id])
   end
 
   def destroy
-    @posts = Post.find(params[:book_id])
-    @post_comment = PostComment.find_by(id: params[:id], post_id: params[:post_id])
-    @post_comment.destroy
+    #@posts = Post.find(params[:post_id])
+    #@post_comment = PostComment.find_by(id: params[:id], post_id: params[:post_id])
+    #@post_comment.destroy
+    #redirect_to post_path
+    post_comment = PostComment.find(params[:id])
+    post = post_comment.post
+    post_comment.destroy
+    redirect_to post_path(post)
   end
 
   private
 
-  def comment_params
-    params.require(:comment).permit(:comment).merge(post_id: params[:post_id])
+  def post_comment_params
+    params.require(:post_comment).permit(:comment).merge(post_id: params[:post_id])
   end
 
 end

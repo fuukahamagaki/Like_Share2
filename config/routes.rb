@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   root :to =>"public/homes#top"
    get "about"=>"public/homes#about"
 
-  
+
   scope module: :public do
     #resources :users, only: [:show, :edit, :update]
      # get "users/:id/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
       #patch "users/:id/withdraw" => "users#withdraw", as: "withdraw"
     resources :posts, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
-     resources :post_comments, only: [:create], shallow: true #shallow→createだけpost_idが欲しいのでonly
+     resources :post_comments, only: [:create, :destroy], shallow: true #shallow→createとdestroyだけpost_idが欲しいのでonly
     end
   end
 
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
-    
+
   }
   #ゲストログイン
   devise_scope :user do

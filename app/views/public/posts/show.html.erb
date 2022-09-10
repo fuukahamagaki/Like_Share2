@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row text-right my-4">
-   <div class="col-sm-3">
+   <div class="col-sm-2">
     <h2>投稿詳細</h2>
    </div>
     <div class="col-sm-3">
@@ -30,18 +30,34 @@
        </div>
 
     <div class="ml-3 mt-5">
-     <%= form_with(session: :post_comment, local:true) do |f| %>
-      <%= f.text_area :comment %>
+     <%= form_with(model:[@post, @post_comment], remote: true) do |f| %>
+      <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", class: "w-100" %>
       <%= f.submit 'コメントする' %>
      <% end %>
     </div>
 
-    <%# @posts.each do |post| %>
-      <tr>
-        <td><%#= link_to post.title,post, class: "post_#{post.id}" %></td>
-        <td><%#= post.body %></td>
-        
+    <div class="ml-3 mt-5">
+     <table class="col-6 table table-bordered mt-3 ml-3 text-center">
 
-    <%# end %>
+      <thead>
+       <tr>
+      　<th>ニックネーム</th>
+        <th>コメント内容</th>
+        <th></th>
+       </tr>
+      </thead>
+      <tbody>
+        <% @post_comments.each do |post_comment| %>
+        <tr>
+          <td><%= post_comment.user.nickname %></td>
+          <td><%= post_comment.comment %></td>
+          <% if post_comment.user == current_user %>
+           <td><%= link_to "Destroy", post_comment_path(post_comment.id), method: :delete, class: "btn btn-danger pull-right", remote: true %></td>
+          <% end %>
+         <% end %>
+        </tr>
+      </tbody>
+     </table>
+    </div>
 
 </div>

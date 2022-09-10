@@ -7,8 +7,8 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id]) #postsテーブルのidを取得している
-    @post_comment = PostComment.new #コメントの新規作成
+    @post = Post.find(params[:id]) 
+    @post_comment = PostComment.new 
     @post_comments = @post.post_comments.includes(:user).order(created_at: :desc)
     @user = @post.user
   end
