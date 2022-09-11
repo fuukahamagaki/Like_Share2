@@ -22,13 +22,25 @@
       <td class="border-dark"><%= @post.body %></td>
     </tr>
   </table>
-       <div class="ml-3">
-        <h5>
-          コメント数: <%= @post.post_comments.count %>
-          いいね数：
-        </h5>
-       </div>
-
+     <div class="ml-3">
+      <h5>
+        コメント数: <%= @post.post_comments.count %>
+        いいね数：<%= @post.favorites.count %>
+      </h5>
+     </div>
+     <div class="ml-3 mt-3">
+       <% if @post.favorited_by?(current_user) %> <!--post.rbで定義したfavorited_by?を呼び出す-->
+        <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+        <%= link_to post_favorites_path(@post.id), method: :delete do %>
+         いいねを外す<i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+        <% end %>
+       <% else %>
+        <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+        <%= link_to post_favorites_path(@post.id), method: :post do %>
+         いいねする<i class="fas fa-heart" aria-hidden="true"></i>
+        <% end %>
+       <% end %>
+     </div>
     <div class="ml-3 mt-5">
      <%= form_with(model:[@post, @post_comment], remote: true) do |f| %>
       <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", class: "w-100" %>
@@ -59,5 +71,7 @@
       </tbody>
      </table>
     </div>
+
+
 
 </div>

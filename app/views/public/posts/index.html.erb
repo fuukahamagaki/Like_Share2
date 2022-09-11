@@ -19,7 +19,7 @@
          <td class="cell1"><%= post.title %></td>
          <td class="cell2"><%= post.body %></td>
          <td class="cell3"><%= post.post_comments.count %></td>
-         <td class="cell4"><%#= post.favorites.count %></td>
+         <td class="cell4"><%= post.favorites.count %></td>
          <td class="cell5">
           <div class="button_cart_item text-center">
           <%= link_to '詳細', post_path(post.id), class:"btn btn-success" %>

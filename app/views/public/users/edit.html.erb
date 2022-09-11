@@ -3,7 +3,7 @@
     <h2>会員情報編集</h2>
   </div>
 
-  <%= form_with model: @user, url: update_user_path, method: :patch,  local: true do |f| %>
+  <%= form_with model: @user, url: user_path, method: :patch,  local: true do |f| %>
     <div class="row mt-3 ml-3">
       <div class="col-2"><%= f.label "氏名" %></div>
       <div class="ml-3"><%= f.text_field :last_name %></div>
@@ -16,6 +16,10 @@
     <div class="row mt-2 ml-3">
       <div class="col-2"><%= f.label "メールアドレス" %></div>
       <div class="col-3"><%= f.text_field :email %></div>
+    </div>
+    <div class="row mt-2 ml-3">
+      <div class="col-2"><%= f.label "自己紹介文" %></div>
+      <div class="col-3"><%= f.text_area :introduction %></div>
     </div>
 
     <div class="row d-flex justify-content-center mt-3">

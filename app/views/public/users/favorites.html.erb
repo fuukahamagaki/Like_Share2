@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row text-right my-4">
+   <div class="col-sm-3">
+    <h2>いいね一覧</h2>
+   </div>
+    <table class="table table-bordered text-center" style="margin-top: 20px;">
+      <thead>
+       <tr>
+      　<th class="cell1"></th>
+        <th class="cell2">タイトル</th>
+        <th class="cell3">本文</th>
+        <th class="cell4"></th>
+       </tr>
+      </thead>
+      <tbody>
+       <% @favorite_posts.each do |post|%>
+        <tr>
+         <td class="cell1"><%= post.user.nickname %></td>
+         <td class="cell2"><%= post.title %></td>
+         <td class="cell3"><%= post.body %></td>
+         <td class="cell4">
+          <div class="button_cart_item text-center">
+           <%= link_to '詳細', post_path(post.id), class:"btn btn-success" %>
+          </div>
+         </td>
+        </tr>
+       <% end %>
+      </tbody>
+     </table>
+  </div>
+ </div>

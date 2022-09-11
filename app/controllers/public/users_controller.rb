@@ -27,11 +27,19 @@ class Public::UsersController < ApplicationController
     reset_session
     redirect_to root_path
   end
+  
+  def favorites
+    @user = User.find(params[:id])
+    #where→与えられた条件にマッチするレコードを全て取得
+    #plunk→post_idカラムの一覧を持ってこれる
+    favorites= Favorite.where(user_id: @user.id).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
+  end
 
   private
 
   def user_params
-    params.require(:user).permit(:last_name, :first_name, :nickname, :email)
+    params.require(:user).permit(:last_name, :first_name, :nickname, :email, :introduction)
   end
 
 end
