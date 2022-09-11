@@ -41,6 +41,14 @@
         <% end %>
        <% end %>
      </div>
+     <div class="ml-3 mt-3">
+      <h5>タグ：
+      <!--タグ-->
+       <% @post_tags.each do |tag| %>
+        <%= link_to tag.name,search_tag_path(tag_id: tag.id)%>
+        <%="(#{tag.posts.count})" %>
+       <% end %></h5>
+     </div>
     <div class="ml-3 mt-5">
      <%= form_with(model:[@post, @post_comment], remote: true) do |f| %>
       <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", class: "w-100" %>
@@ -71,7 +79,5 @@
       </tbody>
      </table>
     </div>
-
-
 
 </div>
