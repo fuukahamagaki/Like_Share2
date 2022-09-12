@@ -31,11 +31,20 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
      resources :post_comments, only: [:create, :destroy], shallow: true #shallow→createとdestroyだけpost_idが欲しいのでonly
      resource :favorites, only: [:create, :destroy]
+     collection do #検索機能
+      get 'search'
+     end
     end
   end
 
+  namespace :admin do
+    root "homes#top"
+    resources :users, only: [:index]
+    resources :posts, only: [:index]
+  end
    # タグの検索で使用する
-   get "search_tag"=>"posts#search_tag"
+   get "search_tag"=>"public/posts#search_tag"
+
 
  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

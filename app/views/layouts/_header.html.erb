@@ -17,8 +17,8 @@
 
       <!-- 管理者がログインしている時 -->
       <% elsif admin_signed_in? %>
-        <li><%= link_to "投稿一覧", post_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "コメント一覧", class: "header-button btn text-light" %></li><!--path-->
+        <li><%= link_to "会員一覧", admin_users_path, class: "header-button btn text-light" %></li>
+        <li><%= link_to "投稿一覧", admin_posts_path, class: "header-button btn text-light" %></li>
         <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header-button btn text-light" %></li>
 
       <!-- ログインしていない時 -->
@@ -31,12 +31,14 @@
      </ul>
 
      <!-- 検索機能 -->
+     <%= form_with(url: search_posts_path, local: true, method: :get ) do |form| %>
      <form class="d-flex">
-      <input class="ml-2 form-control me-2" type="search" placeholder="検索" aria-label="Search">
+      <%= form.text_field :keyword, placeholder: "検索" %>
       <button class="btn btn-outline-light ml-2" type="submit">
         <i class="fas fa-search"></i>
       </button>
      </form>
+     <% end %>
     </div>
    </div>
   </nav>

@@ -47,21 +47,25 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
-
         @post.save_tag(tag_list)
         redirect_to post_path(@post), notice: "更新しました"
-      else
+    else
         render "edit"
-      end
+    end
   end
 
   def search_tag
     #検索結果画面でもタグ一覧表示
-    @tag_list=Tag.all
+    @tag_list = Tag.all
     #検索されたタグを受け取る
-    @tag=Tag.find(params[:tag_id])
+    @tag = Tag.find(params[:tag_id])
     #検索されたタグに紐づく投稿を表示
-    @posts=@tag.posts.page(params[:page]).per(10)
+    @posts = @tag.posts#.page(params[:page]).per(10)
+  end
+
+  def search
+    @posts = Post.search(params[:keyword])
+    #@tag_name = @posts
   end
 
   def destroy

@@ -1,0 +1,45 @@
+<div class="container">
+   <h2 class="mt-4">
+     タグが<%=@tag.name%>の投稿一覧(全<%= @tag.posts.count %>件)
+   </h2>
+   <!--タグリスト-->
+  <div class="row mt-4">
+    <div class="col-2">
+       <h4>その他タグ：</h4>
+    </div>
+    <div class="col-8">
+     <% @tag_list.each do |list|%>
+       <%=link_to list.name,search_tag_path(tag_id: list.id) %>
+       <%="(#{list.posts.count})" %>
+     <% end %>
+    </div>
+  </div>
+  <table class="table table-bordered text-center mt-2">
+    <thead>
+     <tr>
+    　<th class="cell1">タイトル</th>
+      <th class="cell2">本文</th>
+      <th class="cell3">コメント数</th>
+      <th class="cell4">いいね数</th>
+     </tr>
+    </thead>
+    <tbody>
+     <% @posts.each do |post| %>
+      <tr>
+       <td class="cell1">
+        <%=link_to post_path(post.id) do %>
+         <%= post.title.truncate(10) %> <!--タイトル表示される文字数は10文字まで-->
+        <% end %>
+       </td>
+       <td class="cell2"><%= post.body.truncate(20) %></td>
+       <td class="cell3"><%= post.post_comments.count %></td>
+       <td class="cell4"><%= post.favorites.count %></td>
+      </tr>
+     <% end %>
+    </tbody>
+  </table>
+</div>
+
+  <!--<div class="pagination pagination-sm justify-content-center">
+    <%#= paginate @posts %>
+  </div>-->

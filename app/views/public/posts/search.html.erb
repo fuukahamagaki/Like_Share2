@@ -1,0 +1,28 @@
+<div class="container">
+  <h2 class="mt-4">検索結果</h2>
+  <table class="table table-bordered text-center mt-2">
+    <thead>
+     <tr>
+      <th class="cell1">タイトル</th>
+      <th class="cell2">本文</th>
+      <th class="cell3">コメント数</th>
+      <th class="cell4">いいね数</th>
+     </tr>
+    </thead>
+    <tbody>
+     <% @posts.each do |post| %>
+      <tr>
+       <td class="cell1">
+        <%=link_to post_path(post.id) do %>
+         <%#= tag.name %>
+         <%= post.title.truncate(10) %> <!--タイトル表示される文字数は10文字まで-->
+        <% end %>
+       </td>
+       <td class="cell2"><%= post.body.truncate(20) %></td>
+       <td class="cell3"><%= post.post_comments.count %></td>
+       <td class="cell4"><%= post.favorites.count %></td>
+      </tr>
+     <% end %>
+    </tbody>
+  </table>
+</div>
