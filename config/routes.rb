@@ -38,9 +38,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    root "homes#top"
-    resources :users, only: [:index]
-    resources :posts, only: [:index]
+    root "users#index"
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :destroy] do
+      resources :post_comments, only: [:destroy], shallow: true
+    end
   end
    # タグの検索で使用する
    get "search_tag"=>"public/posts#search_tag"

@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row mt-4">
+    <h2>マイページ</h2>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-5 ml-3"><h4><strong><%= @user.nickname%>さんの情報</strong></h4></div>
+     <div class="col-2">
+       <%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-success" %></div>
+     </div>
+
+  <table class="col-6 table table-bordered mt-3 ml-3">
+    <tr>
+      <td class="col-3 table-active border-dark">氏名</td>
+      <td class="border-dark"><%= @user.last_name %> <%= @user.first_name %></td>
+    </tr>
+    <tr>
+      <td class="col-3 table-active border-dark">ニックネーム</td>
+      <td class="border-dark"><%= @user.nickname %></td>
+    </tr>
+    <tr>
+      <td class="col-3 table-active border-dark">メールアドレス</td>
+      <td class="border-dark"><%= @user.email %></td>
+    </tr>
+    <tr>
+	    <td class="col-3 table-active border-dark">自己紹介文</td>
+	    <td class="border-dark"><%= @user.introduction %></td>
+    </tr>
+    <tr>
+	    <td class="col-3 table-active border-dark">ステータス</td>
+	    <td class="border-dark">
+	      <% if @user.is_deleted == false %>
+         <p class="text-success">有効</p>
+        <% else %>
+         <p class="text-secondary">退会</p>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+</div>

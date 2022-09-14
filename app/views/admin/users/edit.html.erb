@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row mt-4">
+    <h2>会員情報編集</h2>
+  </div>
+
+  <%= form_with model: @user, url: admin_user_path, local: true do |f| %>
+    <div class="row mt-3 ml-3">
+      <div class="col-2">会員ID</div>
+      <div class="col-3"><%= @user.id %></div>
+    </div>
+     <div class="row mt-3 ml-3">
+      <div class="col-2"><%= f.label "氏名" %></div>
+      <div class="ml-3"><%= f.text_field :last_name %></div>
+      <div class="col-3"><%= f.text_field :first_name %></div>
+    </div>
+    <div class="row mt-2 ml-3">
+      <div class="col-2"><%= f.label "ニックネーム" %></div>
+      <div class="col-3"><%= f.text_field :nickname %></div>
+    </div>
+    <div class="row mt-2 ml-3">
+      <div class="col-2">メールアドレス</div>
+      <div class="col-3"><%= f.text_field :email %></div>
+    </div>
+    <div class="row mt-2 ml-3">
+      <div class="col-2">自己紹介分</div>
+      <div class="col-3"><%= f.text_area :introduction %></div>
+    </div>
+    <div class="row mt-2 ml-3">
+      <div class="col-2">会員ステータス</div>
+      <div class="col-3">
+        <%= f.radio_button :is_deleted, false %>有効　<%= f.radio_button :is_deleted, true %>退会
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-2"></div>
+      <div class="col-3"><%= f.submit "変更を保存", class: "btn btn-success" %></div>
+    </div>
+  <% end %>
+
+</div>
