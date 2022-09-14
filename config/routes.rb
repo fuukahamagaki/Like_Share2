@@ -21,13 +21,15 @@ Rails.application.routes.draw do
 
 
   scope module: :public do
-    resources :users, only: [:show, :edit, :update] do
+    resources :users, only: [:index, :show, :edit, :update] do
       get "users/:id/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
       patch "users/:id/withdraw" => "users#withdraw", as: "withdraw"
       member do
        get :favorites
       end
     end
+    resources :messages, only: [:create]
+    resources :rooms, only: [:create, :show, :index]
     resources :posts, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
      resources :post_comments, only: [:create, :destroy], shallow: true #shallow→createとdestroyだけpost_idが欲しいのでonly
      resource :favorites, only: [:create, :destroy]

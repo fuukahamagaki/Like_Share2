@@ -1,7 +1,28 @@
 class Public::UsersController < ApplicationController
 
+  def index
+    @users=User.all
+  end
+
   def show
-    @user = current_user
+    @user = User.find(params[:id])
+    @currentUserEntry=Entry.where(user_id: current_user.id) # current_userをEntriesテーブルから探す
+    @userEntry=Entry.where(user_id: @user.id)  # DMを送る対象のユーザーをEntriesテーブルから探す
+    if @user.id != current_user.id
+    # currentUserと@userのEntriesをそれぞれ一つずつ取り出し、2人のroomが既に存在するかを確認
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.room_id == u.room_id  # 2人のroomが既に存在していた場合
+            @isRoom = true 
+            @roomId = cu.room_id  #room_idを取り出す
+          end
+        end
+      end
+     unless @isRoom # 2人ののroomが存在しない場合
+      @room = Room.new
+      @entry = Entry.new
+     end
+    end
   end
 
   def edit
@@ -27,7 +48,7 @@ class Public::UsersController < ApplicationController
     reset_session
     redirect_to root_path
   end
-  
+
   def favorites
     @user = User.find(params[:id])
     #where→与えられた条件にマッチするレコードを全て取得

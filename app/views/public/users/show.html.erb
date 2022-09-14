@@ -32,4 +32,21 @@
 
   <p><%=link_to"お気に入り記事",favorites_user_path(@user) %></p>
 
+
+
+
+  <% if @user.id != current_user.id %>
+    <!--既にroomがある場合（以前にDMのやりとりしている）-->
+    <% if @isRoom == true %>
+      <%= link_to "DM", room_path(@roomId) %>
+    <% else %>
+      <%= form_with @room, local: true do |f| %>
+        <%= fields_for @entry do |e| %>
+          <%= e.hidden_field :user_id, :value=> @user.id %>
+        <% end %>
+        <%= f.submit "チャットを始める" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
 </div>
