@@ -16,7 +16,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.includes(:user).order('created_at DESC')
     @post = Post.new
     @tag_list = Tag.all
     @user = current_user

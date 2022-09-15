@@ -13,7 +13,7 @@ class Public::UsersController < ApplicationController
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
           if cu.room_id == u.room_id  # 2人のroomが既に存在していた場合
-            @isRoom = true 
+            @isRoom = true
             @roomId = cu.room_id  #room_idを取り出す
           end
         end
@@ -60,7 +60,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:last_name, :first_name, :nickname, :email, :introduction)
+    params.require(:user).permit(:last_name, :first_name, :nickname, :email, :introduction, :is_deleted)
   end
 
 end
