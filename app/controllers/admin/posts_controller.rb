@@ -1,7 +1,7 @@
 class Admin::PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    @posts = Post.includes(:user).order('created_at DESC')
   end
 
   def show
@@ -10,7 +10,7 @@ class Admin::PostsController < ApplicationController
     @post_tags = @post.tags
     @user = @post.user
   end
-  
+
   def destroy
     @post = Post.find(params[:id])
     @post.destroy

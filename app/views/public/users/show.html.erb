@@ -4,49 +4,67 @@
   </div>
 
   <div class="row mt-3">
-    <div class="col-2"><h4><strong>登録情報</strong></h4></div>
-    <% if @user.nickname != "guestuser" %>
-     <div class="col-2">
-       <%= link_to "編集する", edit_user_path(@user), class: "btn btn-success" %></div>
-     </div>
-    <% end %>
+   <div class="col-4">
+    <h4><strong>登録情報　　</strong>
+     <% if @user.nickname != "guestuser" %>
+       <%= link_to "編集する", edit_user_path(@user), class: "btn btn-success" %>
+     <% end %>
+    </h4>
+     <table class="table table-bordered mt-3">
+      <tr>
+        <td class="table-active border-dark">氏名</td>
+        <td class="border-dark"><%= @user.last_name %> <%= @user.first_name %></td>
+      </tr>
+      <tr>
+        <td class="table-active border-dark">ニックネーム</td>
+        <td class="border-dark"><%= @user.nickname %></td>
+      </tr>
+      <tr>
+  	    <td class="table-active border-dark">自己紹介文</td>
+  	    <td class="border-dark"><%= @user.introduction %></td>
+      </tr>
+    </table>
+      <p><%=link_to "いいねした記事",favorites_user_path(@user), class: "btn btn-info" %></p>
 
-  <table class="col-6 table table-bordered mt-3 ml-3">
-    <tr>
-      <td class="col-3 table-active border-dark">氏名</td>
-      <td class="border-dark"><%= @user.last_name %> <%= @user.first_name %></td>
-    </tr>
-    <tr>
-      <td class="col-3 table-active border-dark">ニックネーム</td>
-      <td class="border-dark"><%= @user.nickname %></td>
-    </tr>
-    <tr>
-      <td class="col-3 table-active border-dark">メールアドレス</td>
-      <td class="border-dark"><%= @user.email %></td>
-    </tr>
-    <tr>
-	    <td class="col-3 table-active border-dark">自己紹介文</td>
-	    <td class="border-dark"><%= @user.introduction %></td>
-    </tr>
-  </table>
-
-  <p><%=link_to"お気に入り記事",favorites_user_path(@user) %></p>
-
-
-
-
-  <% if @user.id != current_user.id %>
-    <!--既にroomがある場合（以前にDMのやりとりしている）-->
-    <% if @isRoom == true %>
-      <%= link_to "DM", room_path(@roomId) %>
-    <% else %>
-      <%= form_with @room, local: true do |f| %>
-        <%= fields_for @entry do |e| %>
-          <%= e.hidden_field :user_id, :value=> @user.id %>
+      <% if @user.id != current_user.id %>
+        <!--既にroomがある場合（以前にDMのやりとりしている）-->
+        <% if @isRoom == true %>
+          <%= link_to "DMを送る", room_path(@roomId), class: "btn btn-dark" %>
+        <% else %>
+          <%= form_with @room, local: true do |f| %>
+            <%= fields_for @entry do |e| %>
+              <%= e.hidden_field :user_id, :value=> @user.id %>
+            <% end %>
+            <%= f.submit "チャットを始める" %>
+          <% end %>
         <% end %>
-        <%= f.submit "チャットを始める" %>
       <% end %>
-    <% end %>
-  <% end %>
+   </div>
 
+  <div class="col-8">
+    <h4><strong>投稿一覧</strong></h4>
+    <table class='table table-hover table-inverse text-center'>
+      <thead>
+        <tr>
+          <th></th>
+          <th>タイトル</th>
+          <th>内容</th>
+          <th>コメント数</th>
+          <th>いいね数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+            <td><%= link_to post.title,post, class: "post_#{post.id}" %></td>
+            <td><%= post.body %></td>
+            <td><%= post.post_comments.count %>件</td>
+            <td><%= post.favorites.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+ </div>
 </div>

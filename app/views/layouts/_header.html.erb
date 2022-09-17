@@ -11,23 +11,66 @@
      <ul class="nav navbar-nav ml-auto">
       <!-- 会員がログインしている時 -->
       <% if user_signed_in? %>
-        <li><%= link_to "マイページ", user_path(current_user), class: "header-button btn text-light" %></li>
-        <li><%= link_to "投稿一覧", posts_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header-button btn text-light" %></li>
+        <li>
+         <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
+          <i class="far fa-user"></i> マイページ
+         <% end %>
+        </li>
+        <li>
+         <%= link_to posts_path,class: 'nav-link text-light' do %>
+          <i class="fas fa-list"></i> 投稿一覧
+         <% end %>
+        </li>
+        <li>
+         <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
+          <i class="fas fa-sign-out-alt"></i> ログアウト
+         <% end %>
+        </li>
 
       <!-- 管理者がログインしている時 -->
       <% elsif admin_signed_in? %>
-        <li><%= link_to "会員一覧", admin_users_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "投稿一覧", admin_posts_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header-button btn text-light" %></li>
-
+        <li>
+         <%= link_to admin_users_path,class: 'nav-link text-light' do %>
+          <i class="fas fa-users"></i>会員一覧
+         <% end %>
+        </li>
+        <li>
+         <%= link_to admin_posts_path,class: 'nav-link text-light' do %>
+          <i class="fas fa-list"></i> 投稿一覧
+         <% end %>
+        </li>
+        <li>
+         <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
+          <i class="fas fa-sign-out-alt"></i> ログアウト
+         <% end %>
+        </li>
       <!-- ログインしていない時 -->
       <% else %>
-        <li><%= link_to "サイトについて", about_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "投稿一覧", posts_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "新規登録", new_user_registration_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "ログイン", new_user_session_path, class: "header-button btn text-light" %></li>
-        <li><%= link_to "管理者", new_admin_session_path, class: "header-button btn text-light" %></li>
+        <li>
+         <%= link_to about_path,class: 'nav-link text-light' do %>
+          <i class="fas fa-heart"></i> サイトについて
+         <% end %>
+        </li>
+        <li>
+         <%= link_to posts_path,class: 'nav-link text-light' do %>
+          <i class="fas fa-list"></i> 投稿一覧
+         <% end %>
+        </li>
+        <li>
+         <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
+          <i class="fas fa-user-plus"></i> 新規登録
+         <% end %>
+        </li>
+        <li>
+         <%= link_to new_user_session_path,class: 'nav-link text-light' do %>
+          <i class="fas fa-sign-in-alt"></i> ログイン
+         <% end %>
+        </li>
+        <li>
+         <%= link_to new_admin_session_path,class: 'nav-link text-light' do %>
+          <i class="fas fa-user-cog"></i> 管理者
+         <% end %>
+        </li>
       <% end %>
      </ul>
 

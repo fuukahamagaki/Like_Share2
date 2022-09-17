@@ -1,26 +1,35 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row mt-4">
+    <h2 class="text-info">＜ログイン＞</h2>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="row mt-3 ml-3">
+    <h4>会員の方はこちらからログイン</h4>
   </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row mt-3 ml-5">
+      <div class="col-2 ml-5"><%= f.label "メールアドレス" %></div>
+      <div class="col-3"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100" %></div>
+    </div>
+    <div class="row mt-2 ml-5">
+      <div class="col-2 ml-5"><%= f.label "パスワード" %></div>
+      <div class="col-3"><%= f.password_field :password, autocomplete: "current-password", class: "w-100" %></div>
+    </div>
+    <div class="row mt-3 ml-5">
+      <div class="col-2 ml-5"></div>
+      <div class="col-2"><%= f.submit "ログイン", class: "btn btn-primary btn-block" %></div>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="row mt-5 ml-3">
+    <h4>会員登録がお済みでない方</h4>
   </div>
-<% end %>
+  <div class="row mt-2 ml-5"><u><%= link_to "こちら", new_user_registration_path %></u>　から新規登録を行ってください。</div>
 
-<%= render "public/shared/links" %>
+  <div class="row mt-5 ml-3">
+    <h4>ゲストログインをする方</h4>
+  </div>
+  <div class="row mt-2 ml-5"><u><%= link_to "こちら", users_guest_sign_in_path %></u>　を押すとゲストログインできます。</div>
+
+</div>

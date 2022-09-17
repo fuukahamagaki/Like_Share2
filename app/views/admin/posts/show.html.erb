@@ -1,16 +1,18 @@
 <div class="container">
-  <div class="row text-right my-4">
-   <div class="col-sm-2">
-    <h2>投稿詳細</h2>
+  <div class="row mt-4 ml-3">
+   <div class="col-4 mr-3">
+    <h2 class="text-info">＜投稿詳細＞</h2>
    </div>
-    <div class="col-sm-3">
-      <div class="button_post">
-        <%= link_to '編集', class: "btn btn-sm btn-success" %>
-        <%= link_to '削除', admin_post_path(@post.id), method: :delete, class: "btn btn-sm btn-danger"%>
-      </div>
+    <div class="col-4 offset-1">
+      <%= link_to '投稿一覧に戻る',admin_posts_path, class:"btn btn-info" %>
+      <%= link_to '投稿削除', admin_post_path(@post.id), method: :delete, class: "btn btn-danger"%>
     </div>
   </div>
-  <table class="col-6 table table-bordered mt-3 ml-3 text-center">
+  <table class="col-8 table table-bordered mt-3 ml-5 text-center">
+    <tr>
+      <td class="col-3 table-active border-dark">日付</td>
+      <td class="border-dark"><%= @post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+    </tr>
     <tr>
       <td class="col-3 table-active border-dark">タイトル</td>
       <td class="border-dark"><%= @post.title %></td>
@@ -20,18 +22,17 @@
       <td class="border-dark"><%= @post.body %></td>
     </tr>
   </table>
-     <div class="ml-3">
-      <h5>
-        コメント数: <%= @post.post_comments.count %>
-        いいね数：<%= @post.favorites.count %>
-      </h5>
+     <div class="ml-5">
+      <h5 class="mt-3">コメント数：<%= @post.post_comments.count %>件</h5>
+      <h5 class="mt-3">いいね数：<%= @post.favorites.count %>件</h5>
      </div>
     <div class="ml-3 mt-5">
-     <table class="col-6 table table-bordered mt-3 ml-3 text-center">
+     <table class="col-10 table table-hover table-inverse mt-3 ml-3 text-center">
       <thead>
        <tr>
       　<th>ニックネーム</th>
         <th>コメント内容</th>
+        <th></th>
         <th></th>
        </tr>
       </thead>
@@ -40,11 +41,11 @@
         <tr>
           <td><%= post_comment.user.nickname %></td>
           <td><%= post_comment.comment %></td>
-          <td><%= link_to "削除", admin_post_comment_path(post_comment.id), method: :delete, class: "btn btn-danger pull-right", remote: true %></td>
+          <td><%= post_comment.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+          <td><%= link_to "コメント削除", admin_post_comment_path(post_comment.id), method: :delete, class: "btn btn-danger pull-right", remote: true %></td>
         </tr>
         <% end %>
       </tbody>
      </table>
     </div>
-
 </div>
