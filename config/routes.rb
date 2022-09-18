@@ -37,6 +37,8 @@ Rails.application.routes.draw do
       get 'search'
      end
     end
+     # タグの検索で使用する
+     get "search_tag"=>"posts#search_tag"
   end
 
   namespace :admin do
@@ -46,8 +48,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:destroy], shallow: true
     end
   end
-   # タグの検索で使用する
-   get "search_tag"=>"public/posts#search_tag"
+
 
 
  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

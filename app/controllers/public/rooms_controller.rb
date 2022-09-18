@@ -13,7 +13,7 @@ class Public::RoomsController < ApplicationController
     @room = Room.find(params[:id])
     # entriesテーブルにcurrent_user.idと紐付いたチャットルームがあるかどうか確認
     if Entry.where(user_id: current_user.id,room_id: @room.id).present?
-      @messages = @room.messages
+      @messages = @room.messages.order('created_at DESC')
       @message = Message.new
       @entries = @room.entries  # チャットルームのユーザ情報を表示させるため代入
     else

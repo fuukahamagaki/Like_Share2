@@ -27,13 +27,13 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     # 受け取った値を,で区切って配列にする
     tag_list = params[:post][:name].split(',')
-    if @post.save
+    if @post.save!
       @post.save_tag(tag_list)
       redirect_to post_path(@post.id), notice: "投稿しました"
     else
       @posts = Post.all
       @user = current_user
-      render 'show'
+      render 'new'
     end
   end
 

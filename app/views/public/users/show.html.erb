@@ -7,7 +7,9 @@
    <div class="col-4">
     <h4><strong>登録情報　　</strong>
      <% if @user.nickname != "guestuser" %>
+      <% if @user.id == current_user.id %>
        <%= link_to "編集する", edit_user_path(@user), class: "btn btn-success" %>
+      <% end %>
      <% end %>
     </h4>
     <div class="center"></div><%= image_tag @user.get_image, size:'150x150' %>
@@ -17,7 +19,7 @@
         <td class="border-dark"><%= @user.nickname %></td>
       </tr>
       <tr>
-  	    <td class="table-active border-dark">自己紹介文</td>
+  	    <td class="table-active border-dark">自己紹介</td>
   	    <td class="border-dark"><%= @user.introduction %></td>
       </tr>
     </table>
@@ -46,8 +48,8 @@
           <th></th>
           <th>タイトル</th>
           <th>内容</th>
-          <th>コメント数</th>
-          <th>いいね数</th>
+          <th>コメント</th>
+          <th>いいね</th>
         </tr>
       </thead>
       <tbody>
@@ -55,9 +57,9 @@
           <tr>
             <td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
             <td><%= link_to post.title,post, class: "post_#{post.id}" %></td>
-            <td><%= post.body %></td>
+            <td><%= post.body.truncate(20) %></td>
             <td><%= post.post_comments.count %>件</td>
-            <td><%= post.favorites.count %></td>
+            <td><%= post.favorites.count %>件</td>
           </tr>
         <% end %>
       </tbody>

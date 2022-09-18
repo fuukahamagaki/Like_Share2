@@ -11,7 +11,7 @@
    <% post_comments.each do |post_comment| %>
     <tr>
      <td>
-      <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
+      <%= link_to user_path(post_comment.user.id),class: 'nav-link text-light' do %>
        <%= image_tag post_comment.user.get_image, size: '50x50' %>
        <div class="text-dark"><%= post_comment.user.nickname %></div>
       <% end %>

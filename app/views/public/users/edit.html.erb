@@ -6,7 +6,7 @@
   <%= form_with model: @user, url: user_path, method: :patch,  local: true do |f| %>
     <div class="row mt-2 ml-3">
       <div class="col-2 mt-4"><%= f.label :"プロフィール画像" %></div>
-      <div class="col-5">
+      <div class="col-5 mt-4">
         <%= f.file_field :image, class: "form-control-file user_image", accept: 'image/*' %>
       </div>
     </div>

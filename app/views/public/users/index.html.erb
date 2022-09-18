@@ -9,22 +9,24 @@
         <th class="cell1"></th>
         <th class="cell2">ニックネーム</th>
         <th class="cell3">自己紹介分</th>
-        <th class="cell4"></th>
        </tr>
       </thead>
       <tbody>
        <% if user_signed_in? %>
         <% @users.each do |user| %>
          <% if user.nickname != "guestuser" %>
+          <% if user.is_deleted == false %>
            <tr>
-            <td class="cell1"><%= image_tag user.get_image, size:'50x50' %></td>
+            <td class="cell1">
+             <%= link_to user_path(user) do %>
+              <%= image_tag user.get_image, size:'50x50' %>
+             <% end %>
+            </td>
             <td class="cell2"><%= user.nickname %></td>
             <td class="cell3"><%= user.introduction %></td>
-            <td class="cell4">
-             <%= link_to '詳細', user_path(user.id), class:"btn btn-success" %>
-            </td>
            </tr>
           <hr>
+          <% end %>
          <% end %>
         <% end %>
        <% else %>

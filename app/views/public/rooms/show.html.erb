@@ -1,26 +1,45 @@
-<h1>DM</h1>
-
-<h4>参加者</h4>
-<% @entries.each do |e| %>
-  <h5><strong><a href="/users/<%= e.user.id %>"><%= e.user.nickname %>さん</a></strong></h5>
-<% end %>
-
-<hr>
-<% if @messages.present? %>
-  <% @messages.each do |m| %>
-    <strong><%= m.content %></strong>
-    <small>by <strong><a href="/users/<%= m.user_id %>"><%= m.user.nickname %>さん</a></strong></small>
-    <hr>
+<div class="container">
+ <h2 class="text-info mt-3">＜DM＞</h2>
+  <div class="row">
+    <% @entries.each do |entry| %>
+     <a href="/users/<%= entry.user.id %>">
+     （<%= entry.user.nickname %>さん）
+     </a>
+    <% end %>
+    <p>のDM部屋</p>
+  </div>
+  <%= form_with model: @message, local: true do |f| %>
+   <div class="row ml-3">
+    <div class="col-8">
+     <%= f.text_area :content, placeholder: "メッセージを入力して下さい" , size: "60x5"  %>
+     <%= f.hidden_field :room_id, :value => @room.id %>
+     <%= f.submit "投稿する" %>
+    </div>
+    <div class="col-2">
+     <%= link_to "会員一覧に戻る", users_path, class:"btn btn-success" %>
+    </div>
+  </div>
   <% end %>
-<% else %>
-  <h3 class="text-center">メッセージはまだありません</h3>
-<% end %>
 
-<%= form_for @message do |f| %>
-  <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
-  <%= f.hidden_field :room_id, :value => @room.id %>
-  <br>
-  <%= f.submit "投稿する" %>
-<% end %>
+    <hr>
+     <% if @messages.present? %>
+      <% @messages.each do |message| %>
+      <div class="row ml-5">
+       <div class="col-3">
+        <div><%= message.created_at.strftime('%Y-%m-%d %H:%M') %></div>
+        <small>by,<%= message.user.nickname %>さん</small>
+       </div>
+       <div class="col-8 offset-1">
+        <h4><%= message.content %></h4>
+       </div>
+      </div>
+    <hr>
+      <% end %>
+     <% else %>
+      <h3 class="text-center">メッセージはまだありません</h3>
+     <% end %>
 
-<%= link_to "ユーザー一覧に戻る", users_path %>
+
+
+
+</div>
