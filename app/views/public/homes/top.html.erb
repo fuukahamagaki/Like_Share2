@@ -20,24 +20,18 @@
           </tbody>
         </table>
       </div>
-      <div  class='col-md-9 offset-1'>
-        <div class = "top-image text-left ml-4">
-        <%= image_tag 'top.jpg', size:"625x325" ,style:"position: relative;" %>
-            <p style="position:absolute; top:100px; left:200px; color:#FFF; background-color:rgba(0,0,0,0.3);">
-          ようこそ、Likeshareへ！<br>
+      <div  class='col-9 offset-1'>
+        <p class="text-center mr-5">
+          <strong>ようこそ、Likeshareへ！</strong><br>
           このサイトでは、自分の好きを共有できる<br>
           コミュニティサイトとなっております。<br>
           自分の趣味など好きなことを投稿して<br>
-          新しいお友達を探しましょう！</p>
-        </div>
+          新しいお友達を探しましょう！
+        </p>
       <% if user_signed_in? %>
          <div class="row mt-5 ml-2">
-          <div class="col-7"><h4><strong>新規投稿はこちらから→→</strong></h4></div>
+          <div class="col-5"><h4><strong>新規投稿はこちらから→→</strong></h4></div>
           <%= link_to '新規投稿',new_post_path, class: "btn btn-info mb-3" %>
-        </div>
-        <div class="row mt-3 ml-2">
-          <div class="col-7"><h4><strong>会員一覧はこちらから→→</strong></h4></div>
-          <%= link_to '会員一覧',users_path, class: "btn btn-success md-3" %>
         </div>
       <% else %>
         <div class="row mt-5">
@@ -53,6 +47,28 @@
           <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "btn btn-secondary mb-3", method: :post %>
         </div>
       <% end %>
+      <div class="row mt-5">
+       <h4><strong>新着投稿一覧</strong></h4>
+        <div class="ml-5"><%= link_to '→もっと見る',posts_path, class: "btn btn-success md-3" %></div>
+      </div>
+       <table class='table table-hover table-inverse text-center mt-3'>
+          <thead>
+            <tr>
+              <th>投稿日</th>
+              <th>タイトル</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+                <td><%= link_to post.title,post, class: "post_#{post.id}" %></td>
+                <td><%= post.body %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
      </div>
     </div>

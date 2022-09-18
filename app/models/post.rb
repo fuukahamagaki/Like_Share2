@@ -5,12 +5,14 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+  has_many_attached :images
   validates :title, presence:true, length:{in:2..20}
   validates :body, presence:true, length:{maximum:200}
 
   def favorited_by?(user)
    favorites.where(user_id: user.id).exists?
   end
+  
 
   def save_tag(sent_tags)
   # タグが存在していれば、タグの名前を配列として全て取得

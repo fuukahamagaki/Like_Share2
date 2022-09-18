@@ -1,0 +1,27 @@
+<div class="ml-3 mt-5 col-6">
+ <%= form_with(model:[post, post_comment], remote: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", class: "w-100" %>
+  <%= f.submit 'コメントする' %>
+ <% end %>
+</div>
+<div class="ml-3 mt-5">
+ <h3>コメント一覧</h3>
+ <table class="col-10 table table-hover table-inverse mt-3 ml-3">
+  <tbody>
+   <% post_comments.each do |post_comment| %>
+    <tr>
+     <td>
+      <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
+       <%= image_tag post_comment.user.get_image, size: '50x50' %>
+       <div class="text-dark"><%= post_comment.user.nickname %></div>
+      <% end %>
+     </td>
+     <td><%= post_comment.created_at.strftime('%Y-%m-%d %H:%M')%></td>
+     <td><%= post_comment.comment %></td>
+     <% if post_comment.user == current_user %>
+      <td><%= link_to "削除", post_comment_path(post_comment.id), method: :delete, class: "btn btn-danger pull-right", remote: true %></td>
+     <% end %>
+    </tr>
+   <% end %>
+  </tbody>
+ </table>

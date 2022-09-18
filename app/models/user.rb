@@ -10,7 +10,11 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
+  has_one_attached :image
 
+  def get_image
+    (image.attached?) ? image : 'noimage.jpg'
+  end
 
   #ゲストログイン
   def self.guest

@@ -10,7 +10,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
-    @post_comments = @post.post_comments.includes(:user).order(created_at: :desc)
+    @post_comments = @post.post_comments.includes(:user)
     @post_tags = @post.tags
     @user = @post.user
   end
@@ -77,7 +77,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body) #:image
+    params.require(:post).permit(:title, :body, images: [])
   end
 
   def correct_user

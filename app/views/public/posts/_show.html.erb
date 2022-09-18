@@ -1,0 +1,46 @@
+<div class="row text-right my-4">
+  <div class="col-3">
+    <h2 class="text-info">＜投稿詳細＞</h2>
+  </div>
+  <div class="col-sm-3">
+   <% if current_user.id == user.id %>
+    <%= link_to '編集', edit_post_path(post), class: "btn btn-sm btn-success" %>
+    <%= link_to '削除', post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+   <% end %>
+  </div>
+</div>
+<div>投稿者：<%= post.user.nickname %></div>
+<div>投稿日：<%= post.created_at.strftime('%Y-%m-%d %H:%M') %></div>
+<table class="col-6 table table-bordered mt-3 ml-3 text-center">
+  <tr>
+    <td class="col-3 table-active border-dark">タイトル</td>
+    <td class="border-dark"><%= post.title %></td>
+  </tr>
+  <tr>
+    <td class="col-3 table-active border-dark">本文</td>
+    <td class="border-dark"><%= post.body %></td>
+  </tr>
+  <tr>
+    <td class="col-3 table-active border-dark">画像</td>
+    <td class="border-dark">
+     <% post.images.each do |image| %> <!--投稿本文に関する画像を表示-->
+      <%= image_tag image, size: '100x100' %>
+     <% end %>
+    </td>
+  </tr>
+</table>
+<div class="ml-3">
+ <h5>
+  コメント数: <%= post.post_comments.count %>
+  いいね数：<%= post.favorites.count %>
+ </h5>
+</div>
+<%= render 'public/favorites/favorites', post: post %>
+<div class="ml-3 mt-3">
+  <h5>タグ：
+   <% @post_tags.each do |tag| %><!--タグ-->
+    <%= link_to tag.name,search_tag_path(tag_id: tag.id)%>
+    <%="(#{tag.posts.count})" %>
+   <% end %>
+  </h5>
+</div>
