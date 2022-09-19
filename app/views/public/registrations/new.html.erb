@@ -11,6 +11,10 @@
       <div class="col-3"><%= f.text_field :first_name, placeholder:"道子" %></div>
     </div>
     <div class="row mt-2">
+      <div class="col-3 ml-5"><%= f.label "ニックネーム(表示名)" %></div>
+      <div class="col-3"><%= f.text_field :nickname %></div>
+    </div>
+    <div class="row mt-2">
       <div class="col-3 ml-5"><%= f.label "メールアドレス" %></div>
       <div class="col-3"><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com" %></div>
     </div>

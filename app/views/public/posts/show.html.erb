@@ -1,4 +1,8 @@
 <div class="container">
+ <% if user_signed_in? %>
+ <% else %>
+ <h3 class="text-success">いいね・コメントをする際はログインor新規登録をしてください。</h3>
+ <% end %>
  <%= render 'show', user: @user, post: @post, post_tags: @post_tags %>
  <%= render 'comments', post_comments: @post_comments, post: @post, post_comment: @post_comment %>
 </div>

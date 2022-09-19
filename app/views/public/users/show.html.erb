@@ -30,7 +30,7 @@
         <% if @isRoom == true %>
           <%= link_to "DMを送る", room_path(@roomId), class: "btn btn-dark" %>
         <% else %>
-          <%= form_with @room, local: true do |f| %>
+          <%= form_with model: @room, local: true do |f| %>
             <%= fields_for @entry do |e| %>
               <%= e.hidden_field :user_id, :value=> @user.id %>
             <% end %>

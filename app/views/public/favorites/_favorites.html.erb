@@ -1,4 +1,5 @@
-<div class="ml-3 mt-3">
+<div class="ml-5 mt-3">
+ <% if user_signed_in? %>
  <!--post.rbで定義したfavorited_by?を呼び出す-->
  <% if post.favorited_by?(current_user) %>
   <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
@@ -10,5 +11,6 @@
   <%= link_to post_favorites_path(post.id), method: :post do %>
    いいねする<i class="fas fa-heart" aria-hidden="true"></i>
   <% end %>
+ <% end %>
  <% end %>
 </div>

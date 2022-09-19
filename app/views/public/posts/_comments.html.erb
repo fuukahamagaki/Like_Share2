@@ -1,7 +1,14 @@
 <div class="ml-3 mt-5 col-6">
+ <% if user_signed_in? %>
+  <%= form_with(model:[post, post_comment], remote: true) do |f| %>
+   <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", class: "w-100" %>
+   <%= f.submit 'コメントする' %>
+  <% end %>
+ <% else %>
  <%= form_with(model:[post, post_comment], remote: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", class: "w-100" %>
-  <%= f.submit 'コメントする' %>
+   <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", class: "w-100" %>
+   <%= link_to 'コメントする',new_user_registration_path, class: "btn btn-info mb-3" %>
+  <% end %>
  <% end %>
 </div>
 <div class="ml-3 mt-5">

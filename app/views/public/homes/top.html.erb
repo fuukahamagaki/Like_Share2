@@ -28,26 +28,7 @@
           自分の趣味など好きなことを投稿して<br>
           新しいお友達を探しましょう！
         </p>
-      <% if user_signed_in? %>
-         <div class="row mt-5 ml-2">
-          <div class="col-5"><h4><strong>新規投稿はこちらから→→</strong></h4></div>
-          <%= link_to '新規投稿',new_post_path, class: "btn btn-info mb-3" %>
-        </div>
-      <% else %>
         <div class="row mt-5">
-          <div class="col-7"><h4><strong>　会員の方はこちらから　→→</strong></h4></div>
-          <%= link_to 'ログイン',new_user_session_path, class: "btn btn-info mb-3" %>
-        </div>
-        <div class="row mt-3">
-          <div class="col-7"><h4><strong>新規会員登録はこちらから→→</strong></h4></div>
-          <%= link_to '新規会員登録',new_user_registration_path, class: "btn btn-success md-3" %>
-        </div>
-        <div class="row mt-4">
-          <div class="col-7"><h4><strong>ゲスト(閲覧用)はこちらから→→</strong></h4></div>
-          <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "btn btn-secondary mb-3", method: :post %>
-        </div>
-      <% end %>
-      <div class="row mt-5">
        <h4><strong>新着投稿一覧</strong></h4>
         <div class="ml-5"><%= link_to '→もっと見る',posts_path, class: "btn btn-success md-3" %></div>
       </div>
@@ -69,6 +50,25 @@
             <% end %>
           </tbody>
         </table>
+      <% if user_signed_in? %>
+         <div class="row mt-5">
+          <div class="col-5"><h4><strong>新規投稿はこちらから→→</strong></h4></div>
+          <%= link_to '新規投稿',new_post_path, class: "btn btn-info mb-3" %>
+        </div>
+      <% else %>
+        <div class="row mt-5">
+          <div class="col-7"><h4><strong>　会員の方はこちらから　→→</strong></h4></div>
+          <%= link_to 'ログイン',new_user_session_path, class: "btn btn-info mb-3" %>
+        </div>
+        <div class="row mt-3">
+          <div class="col-7"><h4><strong>新規会員登録はこちらから→→</strong></h4></div>
+          <%= link_to '新規会員登録',new_user_registration_path, class: "btn btn-success md-3" %>
+        </div>
+        <div class="row mt-4">
+          <div class="col-7"><h4><strong>ゲスト(閲覧用)はこちらから→→</strong></h4></div>
+          <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "btn btn-secondary mb-3", method: :post %>
+        </div>
+      <% end %>
       </div>
      </div>
     </div>
