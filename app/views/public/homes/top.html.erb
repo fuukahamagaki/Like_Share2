@@ -62,7 +62,6 @@
           <tbody>
             <% @posts.each do |post| %>
             <% if @posts == nil %>
-            <h3>投稿がまだありません。</h3>
             <% else %>
               <tr>
                 <td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
