@@ -20,7 +20,7 @@
       </tr>
       <tr>
   	    <td class="table-active border-dark">自己紹介</td>
-  	    <td class="border-dark"><%=safe_join(@user.introduction.split("\n"),tag(:br))%></td>
+  	    <td class="border-dark"><%= simple_format(@user.introduction) %></td>
       </tr>
     </table>
       <p><%=link_to "いいねした記事",favorites_user_path(@user), class: "btn btn-info" %></p>
