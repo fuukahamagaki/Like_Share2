@@ -24,7 +24,7 @@
 </div>
 <hr>
 <div class="row">
- <h5>タグ：</h5>
+ <h5 class="ml-3">タグ：</h5>
  <% @post_tags.each do |tag| %>
   <h5>
    <%= link_to tag.name,search_tag_path(tag_id: tag.id)%>
