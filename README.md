@@ -22,3 +22,10 @@
 
 　　自分の好きなことなどを誰かと共有したい、知ってもらいたいと思った時に気軽に利用する等。
 
+### ER図
+
+　　https://app.diagrams.net/#G1dvyzq2X1tNcd_onZII1jn7OOxSENY9Kg
+
+### テーブル定義書
+
+　　https://docs.google.com/spreadsheets/d/1e0v-7uSyV9fU0ZwTIgzK5lDnl0-Z7mEb/edit#gid=346684166
