@@ -24,14 +24,27 @@
     <hr>
      <% if @messages.present? %>
       <% @messages.each do |message| %>
-      <div class="media my-5">
-       <div class="mr-3"><%= image_tag message.user.get_image, size:'50x50' %></div>
-        <div class="media-body">
-         <h5 class="mt-0"><%= simple_format(message.content) %></h5>
-         <div><%= message.created_at.strftime('%Y-%m-%d %H:%M') %>　by,<%= message.user.nickname %>さん</div>
+       <% if message.user_id == current_user.id %>
+        <div class="current_user">
+         <div class="text-right">
+          <div class="row mr-3">
+           <h4 class="col-8 offset-2"><%= simple_format(message.content) %></h4>
+           <div class="col-2"><%= image_tag message.user.get_image, size:'50x50' %></div>
+          </div>
+          <div><%= message.created_at.strftime('%Y-%m-%d %H:%M') %>　by,<%= message.user.nickname %>さん</div>
+         </div>
         </div>
-      </div>
-    <hr>
+        <hr>
+       <% else %>
+        <div class="visited_user">
+         <div class="row ml-3">
+         <div class="col-2"><%= image_tag message.user.get_image, size:'50x50' %></div>
+          <h4 class="col-8"><%= simple_format(message.content) %></h4>
+         </div>
+          <div><%= message.created_at.strftime('%Y-%m-%d %H:%M') %>　by,<%= message.user.nickname %>さん</div>
+        </div>
+        <hr>
+       <% end %>
       <% end %>
      <% else %>
       <h3 class="text-center">メッセージはまだありません</h3>
